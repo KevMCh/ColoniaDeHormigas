@@ -8,12 +8,12 @@ public class ObRecolecta : MonoBehaviour {
 	
 	void Start () {
 
-		System.Random rnd = new System.Random(System.DateTime.Now.Millisecond);
+		System.Random rnd = new System.Random(System.DateTime.Now.Millisecond + (int) objt.transform.position.x + (int) objt.transform.position.z);
 		
-		//float x = rnd.Next(1, 496);
-		//float y = rnd.Next(4, 496);
+		float x = rnd.Next(1, 496);
+		float z = rnd.Next(4, 496);
 		
-		//objt.transform.position = new Vector3(x, 2.5f, y);
+		objt.transform.position = new Vector3(x, 2.5f, z);
 	
 	}
 
