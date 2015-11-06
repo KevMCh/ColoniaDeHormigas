@@ -108,8 +108,9 @@ public class CardboardHead : MonoBehaviour {
 
     if (trackPosition) {
       Vector3 pos = Cardboard.SDK.HeadPose.Position;
+	  Vector3 posMas = new Vector3(0.0f,0.1f,0.33f);
       if (target == null) {
-        transform.localPosition = pos;
+        transform.localPosition = pos + posMas;
       } else {
         transform.position = target.position + target.rotation * pos;
       }
