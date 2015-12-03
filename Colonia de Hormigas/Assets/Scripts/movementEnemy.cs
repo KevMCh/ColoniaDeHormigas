@@ -7,13 +7,15 @@ public class movementEnemy : MonoBehaviour {
 	
 	public GameObject[] HitosPatronMovimiento;
 	public float Speed;
-	public Text winText;
+	public Text winText1;
+	public Text winText2;
 	
 	private Transform thisTransform;
 	private Rigidbody thisRigidbody;
 	private int HitoSiguiente;
 	private double [] dist;
 	private bool Terrestre;
+	private int countCube;
 
 	private void swap(int i, int j){
 		
@@ -53,9 +55,12 @@ public class movementEnemy : MonoBehaviour {
 	}
 
 	private void setCountText(){
+
+		//Arreglar
 		
-		if (HitoSiguiente >= 6) {
-			winText.text = "You lose!!";
+		if ((countCube >= 6)&&(winText1.text == "")&&(winText2.text == "")){
+			winText1.text = "You lose!!";
+			winText2.text = "You lose!!";
 		}
 	}
 
@@ -111,8 +116,10 @@ public class movementEnemy : MonoBehaviour {
 
 		dist = new double[12];
 
+		countCube = 0;
 		HitoSiguiente = 0;
-		winText.text = "";
+		winText1.text = "";
+		winText1.text = "";
 	}
 
 	void Update(){
@@ -146,7 +153,12 @@ public class movementEnemy : MonoBehaviour {
 		
 		if (other.gameObject.CompareTag ("Pick Up")){
 			HitoSiguiente = HitoSiguiente +1;
-			other.gameObject.SetActive (false);
+
+			if(other.gameObject.activeSelf){
+
+				countCube ++;
+				other.gameObject.SetActive (false);
+			}
 		}
 
 		setCountText ();

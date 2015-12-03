@@ -65,6 +65,8 @@ public class CardboardHead : MonoBehaviour {
   /// during `Update()` by setting this to true.
   public bool updateEarly = false;
 
+	public GameObject obj;
+
   /// Returns a ray based on the heads position and forward direction, after making
   /// sure the transform is up to date.  Use to raycast into the scene to determine
   /// objects that the user is looking at.
@@ -99,9 +101,31 @@ public class CardboardHead : MonoBehaviour {
 
     if (trackRotation) {
       var rot = Cardboard.SDK.HeadPose.Orientation;
+
+	  //Miramos la rotación que tiene, solo nos interesa el eje y
+	  Vector3 rotation = Cardboard.SDK.HeadPose.Orientation.eulerAngles;
+
+	  rotation.x = (float) 0.0;
+
+	  if(rotation.y >= 180){
+
+			rotation.y = (float) rotation.y - 360;
+				
+	  }
+
+	  rotation.z = (float) 0.0;
+
+
       if (target == null) {
         transform.localRotation = rot;
+
+		//Rotamos el objeto 
+		float speed = (float) 0.08;
+		obj.transform.Rotate(rotation * Time.deltaTime * speed);
+
+
       } else {
+
         transform.rotation = target.rotation * rot;
       }
     }

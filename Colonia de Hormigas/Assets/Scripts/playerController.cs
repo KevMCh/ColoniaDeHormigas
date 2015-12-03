@@ -5,44 +5,52 @@ using System.Collections;
 public class playerController : MonoBehaviour {
 	
 	public float speed;
-	public Text countText;
-	public Text winText;
-	
-	//private Rigidbody rb;
+	public Text countText1;
+	public Text countText2;
+	public Text winText1;
+	public Text winText2;
+
 	private int count;
 	
 	void Start (){
-		//rb = GetComponent<Rigidbody>();
+
 		count = 0;
 		setCountText ();
-		winText.text = "";
+		winText1.text = "";
+		winText2.text = "";
 	}
 	
 	void FixedUpdate (){
-		float moveHorizontal = Input.GetAxis ("Horizontal");
+
+		/*float moveHorizontal = Input.GetAxis ("Horizontal");
 		float moveVertical = Input.GetAxis ("Vertical");
-		
-		//Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
-		//Vector3 movement = new Vector3 (moveHorizontal, 0.0f, 0.0f);
-		
-		//rb.AddForce (movement * speed);
-		this.transform.Translate ( Vector3.forward * moveVertical * speed);
-		this.transform.Rotate ( Vector3.up * moveHorizontal * speed* 2.0f);
+
+		this.transform.Rotate ( Vector3.up * moveHorizontal * speed* 2.0f);*/
+
+		this.transform.Translate ( Vector3.forward * Time.deltaTime * speed);
+
 	}
 	
 	void OnTriggerEnter(Collider other){
-		if (other.gameObject.CompareTag ("Pick Up"))
-		{
-			other.gameObject.SetActive (false);
-			count = count +1;
-			setCountText();
+		if (other.gameObject.CompareTag ("Pick Up")){
+
+			if(other.gameObject.activeSelf){
+
+				other.gameObject.SetActive (false);
+				count = count +1;
+				setCountText();
+			}
 		}
 	}
 
 	void setCountText(){
-		countText.text = "Count: " + count.ToString();
-		if (count > 6) {
-			winText.text = "You win!!";
+		countText1.text = "Count: " + count.ToString();
+		countText2.text = "Count: " + count.ToString();
+
+		if ((count > 6)&&(winText1.text == "")&&(winText2.text == "")){
+
+			winText1.text = "You win!!";
+			winText2.text = "You win!!";
 		}
 	}
 }
