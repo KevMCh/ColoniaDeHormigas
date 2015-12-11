@@ -120,9 +120,8 @@ public class CardboardHead : MonoBehaviour {
         transform.localRotation = rot;
 
 		//Rotamos el objeto 
-		float speed = (float) 0.08;
-		obj.transform.Rotate(rotation * Time.deltaTime * speed);
-
+		float speed = (float) 0.01;
+		obj.transform.Rotate(rotation * speed);
 
       } else {
 
